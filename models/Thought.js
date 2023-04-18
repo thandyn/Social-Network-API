@@ -3,27 +3,27 @@ const { Schema, model } = require("mongoose");
 const thoughtSchema = new Schema(
   {
     thoughtText: {
-      type: String, 
-      required: true, 
+      type: String,
+      required: true,
       minlenght: 1,
-      maxlength: 280, 
+      maxlength: 280,
     },
     createdAt: {
-      type: Date, 
+      type: Date,
       default: Date.now,
-      get: 
+      get: (timestamp) => timestamp.toLocalDateString(),
     },
     username: {
-      type: String, 
+      type: String,
       required: true,
     },
     reactions: [reactionSchema],
-  },
-  {
-    toJSON: {
-      getters
-    }
   }
+  // {
+  //   toJSON: {
+  //     getters
+  //   }
+  // }
 );
 
 thoughtSchema.virtual("reactionCount").get(function () {
